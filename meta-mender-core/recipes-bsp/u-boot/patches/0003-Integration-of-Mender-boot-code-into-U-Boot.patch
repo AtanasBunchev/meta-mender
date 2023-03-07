@@ -1,7 +1,7 @@
 From 6802750fbe50f8c75a6678493464347958df761b Mon Sep 17 00:00:00 2001
 From: Marcin Pasinski <marcin.pasinski@northern.tech>
 Date: Wed, 31 Jan 2018 18:10:04 +0100
-Subject: [PATCH 3/3] Integration of Mender boot code into U-Boot.
+Subject: [PATCH 3/4] Integration of Mender boot code into U-Boot.
 
 Signed-off-by: Kristian Amlie <kristian.amlie@mender.io>
 Signed-off-by: Maciej Borzecki <maciej.borzecki@rndity.com>
@@ -21,10 +21,10 @@ index 23430dc70d..a8c782c725 100644
  
 +#include <env_mender.h>
 +
- #ifdef DEFAULT_ENV_INSTANCE_EMBEDDED
- env_t embedded_environment __UBOOT_ENV_SECTION__(environment) = {
- 	ENV_CRC,	/* CRC Sum */
-@@ -24,6 +26,7 @@ char default_environment[] = {
+ #ifndef USE_HOSTCC
+ #include <generated/environment.h>
+ #endif
+@@ -31,6 +33,7 @@ char default_environment[] = {
  #else
  const char default_environment[] = {
  #endif
